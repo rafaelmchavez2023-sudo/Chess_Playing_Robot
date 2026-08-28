@@ -1,0 +1,250 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="EgZWq3xM7ZzxJScMU8pV">
+    <mxGraphModel dx="2264" dy="777" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="28bZZ6woTBsZw95g57t5-5" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="28bZZ6woTBsZw95g57t5-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-1" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.start_1;whiteSpace=wrap;" value="Start by press of physical button" vertex="1">
+          <mxGeometry height="60" width="100" x="375" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-2" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" value="Stop" vertex="1">
+          <mxGeometry height="60" width="100" x="-350" y="295" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-13" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="28bZZ6woTBsZw95g57t5-14">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="190" y="170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-19" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-20" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-21" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-51" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-50">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-54" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-53">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="All subsystems initialize and self calibrate" vertex="1">
+          <mxGeometry height="60" width="120" x="365" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-24" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Arm Subsystem initialization and Calibration" vertex="1">
+          <mxGeometry height="60" width="120" x="80" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-26" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Camera Subsystem Initialization and calibration" vertex="1">
+          <mxGeometry height="60" width="120" x="80" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-25" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-10" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Gripper Subsystem Initialization and Calibration" vertex="1">
+          <mxGeometry height="60" width="120" x="80" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-23" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-27" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-14" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Clock Subsystem Initialization and Calibration" vertex="1">
+          <mxGeometry height="60" width="120" x="80" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-34" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-36" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="28bZZ6woTBsZw95g57t5-35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-15" parent="1" style="rhombus;whiteSpace=wrap;html=1;shapeInside=1;" value="If Clock is switched on then mark play mode as Timed" vertex="1">
+          <mxGeometry height="140" width="145" x="-166.87" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-30" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-38">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-94.40000000000009" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-22" parent="1" style="rhombus;whiteSpace=wrap;html=1;shapeInside=1;" value="If any fail initialization or calibration, call termination protocol to all sensors and actuators, otherwise continue to environment recognition" vertex="1">
+          <mxGeometry height="170" width="191.25" x="-190" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-28" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="28bZZ6woTBsZw95g57t5-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-33" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="For Timed Mode(10 min per player), make average time between opponent end turn time and release of piece 7.5 seconds, but uniform distribution between 5 and 10 seconds." vertex="1">
+          <mxGeometry height="120" width="180" x="-400" y="10" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-35" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="If not in timed mode set move time to 10 seconds" vertex="1">
+          <mxGeometry height="100" width="180" x="-400" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-40" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-39">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-41" connectable="0" parent="28bZZ6woTBsZw95g57t5-40" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="If White" vertex="1">
+          <mxGeometry relative="1" x="0.1009" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-44" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-42">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-45" connectable="0" parent="28bZZ6woTBsZw95g57t5-44" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="If Black" vertex="1">
+          <mxGeometry relative="1" x="-0.0097" y="-4" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-47" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-46">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-38" parent="1" style="rhombus;whiteSpace=wrap;html=1;shapeInside=1;" value="Identify Player[B/W] to if first play belongs to opponent or ChessBot depending on board configuration" vertex="1">
+          <mxGeometry height="160" width="191.25" x="-189.99" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-43" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-42">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-39" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Move First" vertex="1">
+          <mxGeometry height="60" width="120" x="-270" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-60" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="28bZZ6woTBsZw95g57t5-49">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-42" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Wait for End of Opponents Turn marked by physical button" vertex="1">
+          <mxGeometry height="80" width="130.01" x="-159.37" y="830" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-46" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Alternating LED light marking if ChessBot or opponents turn as an observable reminder, Green LEDS will be opponent and Blue LEDS will be ChessBot" vertex="1">
+          <mxGeometry height="100" width="180" x="-29.36" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-61" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-56">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-63" connectable="0" parent="28bZZ6woTBsZw95g57t5-61" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Not checkmate" vertex="1">
+          <mxGeometry relative="1" x="-0.3199" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-70" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-69">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-72" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-67">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="60" y="1010" />
+              <mxPoint x="60" y="1180" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-78" connectable="0" parent="28bZZ6woTBsZw95g57t5-72" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Stalemate" vertex="1">
+          <mxGeometry relative="1" x="0.0003" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-74" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-49" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-69">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-75" connectable="0" parent="28bZZ6woTBsZw95g57t5-74" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Checkmate" vertex="1">
+          <mxGeometry relative="1" x="0.4477" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-49" parent="1" style="rhombus;whiteSpace=wrap;html=1;shapeInside=1;" value="Check if Checkmate or Stalemate&amp;nbsp;" vertex="1">
+          <mxGeometry height="100" width="139.37" x="-164.06" y="960" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-52" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-50" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-50" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Stockfish API loader" vertex="1">
+          <mxGeometry height="60" width="120" x="80" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-55" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-53" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Stockfish ELO physical setting. Screen with switch buttons to set ELO of stockfish, and a physical screen displaying it" vertex="1">
+          <mxGeometry height="80" width="200" x="80" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-62" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-57">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-56" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="ChessBot&#39;s Move" vertex="1">
+          <mxGeometry height="70" width="145" x="-166.88" y="1110" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-58" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-42">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-240" y="1270" />
+              <mxPoint x="-240" y="870" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-59" connectable="0" parent="28bZZ6woTBsZw95g57t5-58" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="If not Checkmate" vertex="1">
+          <mxGeometry relative="1" x="-0.139" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-71" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="28bZZ6woTBsZw95g57t5-67">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-77" connectable="0" parent="28bZZ6woTBsZw95g57t5-71" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Stalemate" vertex="1">
+          <mxGeometry relative="1" x="0.5532" y="-2" as="geometry">
+            <mxPoint x="-92" y="3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-73" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-69">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-76" connectable="0" parent="28bZZ6woTBsZw95g57t5-73" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="Checkmate" vertex="1">
+          <mxGeometry relative="1" x="0.6079" y="-2" as="geometry">
+            <mxPoint x="-10" y="251" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-57" parent="1" style="rhombus;whiteSpace=wrap;html=1;shapeInside=1;" value="Check if Checkmate or stalemate" vertex="1">
+          <mxGeometry height="100" width="139.37" x="-164.07" y="1220" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-67" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Flash Green and Blue LEDS Indicating a tie for 10 seconds" vertex="1">
+          <mxGeometry height="70" width="139.37" x="110" y="1140" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-69" parent="1" style="rounded=0;whiteSpace=wrap;html=1;" value="Flash LEDS corresponding to winning player for 10 seconds" vertex="1">
+          <mxGeometry height="70" width="139.37" x="60" y="900" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-80" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-69" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-82">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="280" y="935" />
+              <mxPoint x="280" y="1060" />
+            </Array>
+            <mxPoint x="310" y="1070" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-81" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-67" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="28bZZ6woTBsZw95g57t5-82">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="280" y="1175" />
+              <mxPoint x="280" y="1060" />
+            </Array>
+            <mxPoint x="310" y="1070" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-82" parent="1" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;" value="Reset Chessboard" vertex="1">
+          <mxGeometry height="100" width="100" x="310" y="1010" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-83" parent="1" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" value="Sensor and Actuator Termination Protocol" vertex="1">
+          <mxGeometry height="60" width="120" x="490" y="1030" as="geometry" />
+        </mxCell>
+        <mxCell id="28bZZ6woTBsZw95g57t5-84" edge="1" parent="1" source="28bZZ6woTBsZw95g57t5-82" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="28bZZ6woTBsZw95g57t5-83">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
