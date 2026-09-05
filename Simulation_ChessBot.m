@@ -1,0 +1,356 @@
+%% Chess Robot Simulation - Consolidated
+% Combines: (1) the rigidBodyTree robot-definition script and
+%           (2) the ChessBot Workspace Planning / Linkage Dimensioning script
+%
+% UNITS: everything in this script is in INCHES. rigidBodyTree performs
+% pure kinematics and does not require SI units -- as long as every
+% length fed into it uses the same unit consistently, the math is valid.
+% (Only dynamics/gravity properties, which this script doesn't use,
+% assume meters by default in Robotics System Toolbox.)
+%
+% Frame convention: "ChessBot frame" -- origin at the robot's base
+% (joint 1), matching the rigidBodyTree's own base frame. The board's
+% "BLS frame" (playing-side leftmost square, i.e. the square nearest the
+% robot) is related to it via base_center_BLS_frame. The board sits on
+% the XY plane (z = 0), level with the robot's base actuator (joint 1's
+% fixed transform is also at the origin, z = 0).
+
+%% ---- 1. ChessBot Workspace Planning parameters (unchanged from your script) ----
+% Side length of 1 square for chess board
+squareSideLength = 1.5; % inches
+boardSideLength = squareSideLength * 8;
+boardBoundary = 1; % inch
+boardHeight = 0.75; % inch -- physical board thickness (not used for placement; board sits at z=0)
+boardTotalLength = boardSideLength + 2*boardBoundary;
+tol = 0.5; % inches
+
+% Information about piece dimensions
+pieceBaseDiameter = 1; % inch
+pieceHeadDiameter = 0.625; % inch
+pieceNeckDiameter = 0.5; % inch
+heightKQ = 2.5; % Height for King and Queen pieces, inches
+heightRNB = 2.0; % Height for Rook, Knight, and Bishop pieces, inches
+heightP = 1.5; % Height for Pawn pieces, inches
+
+%{
+Desired Minimum Workspace Boundaries for End Effector
+End effector must be able to reach these coordinates, relative to the
+ChessBot's playing-side leftmost square geometric center (BLS frame).
+%}
+maxXmove = 7 * squareSideLength;
+maxYmove = 7 * squareSideLength;
+maxZmove = 2*heightKQ + 0.5;
+
+%{
+Points: {[X1, Y1, Z1]}
+positive X axis is to the right of the board
+positive Y axis is across the board
+positive Z axis is up
+%}
+workspace_boundary_points_BLS_frame = {[0, 0, 0], ...
+                             [maxXmove, 0, 0], ...
+                             [0, maxYmove, 0], ...
+                             [0, 0, maxZmove], ...
+                             [maxXmove, maxYmove, 0], ...
+                             [maxXmove, 0, maxZmove], ...
+                             [0, maxYmove, maxZmove], ...
+                             [maxXmove, maxYmove, maxZmove]};
+
+link1 = 9+1; % inches for vertical offset
+link2 = 5; % inches
+link3 = 3; % inches
+platform_dia = 2; % inches
+
+base_center_BLS_frame = [maxXmove/2, -tol - platform_dia/2, 0]; % robot base center, in BLS frame
+
+workspace_boundary_points_chessbot_frame = cellfun(@(v) v - base_center_BLS_frame, ...
+    workspace_boundary_points_BLS_frame, 'UniformOutput', false);
+
+% Convert the cell array into an Nx3 numerical matrix (inches)
+points_matrix = vertcat(workspace_boundary_points_chessbot_frame{:});
+X = points_matrix(:, 1);
+Y = points_matrix(:, 2);
+Z = points_matrix(:, 3);
+
+% Standalone diagnostic plot (kept from your original script)
+figure('Name', 'Workspace Boundary Points (diagnostic)');
+scatter3(X, Y, Z, 100, 'red', 'filled', 'MarkerFaceAlpha', 0.7);
+xlabel('X Boundary (in)'); ylabel('Y Boundary (in)'); zlabel('Z Boundary (in)');
+title('Workspace Boundary Points (ChessBot Frame)');
+grid on; axis equal; view(3);
+
+%% ---- 2. Robot definition (inches throughout; joint/limit choices unchanged) ----
+robot = rigidBodyTree('DataFormat', 'column', 'MaxNumBodies', 6);
+% NOTE: MaxNumBodies=6 covers the 5 bodies built below (yaw, shoulder,
+% elbow, wrist, endeffector) plus 1 reserved slot for the gripper once
+% it's added as an actual body. The config vector stays 4x1 either way,
+% since fixed joints (the tip) and not-yet-added bodies (gripper) don't
+% consume a DOF slot.
+
+% Joint 1: Base yaw -- actuator 1, positioned AT the platform origin
+% (the green dot). Controls the XY-plane angle.
+bodyYaw = rigidBody('yaw');
+jnt1 = rigidBodyJoint('joint1', 'revolute');
+jnt1.JointAxis = [0 0 1];
+jnt1.PositionLimits = [0, pi];
+setFixedTransform(jnt1, trvec2tform([0 0 0])); % at the green dot
+bodyYaw.Joint = jnt1;
+addBody(robot, bodyYaw, 'base');
+
+% Joint 2: Shoulder pitch -- actuator 2, positioned 1" BELOW the yaw
+% actuator (i.e. 1" below the green dot).
+bodyShoulder = rigidBody('shoulder');
+jnt2 = rigidBodyJoint('joint2', 'revolute');
+jnt2.JointAxis = [0 1 0];
+jnt2.PositionLimits = [pi, 2*pi];
+setFixedTransform(jnt2, trvec2tform([0 0 -1])); % 1" below the yaw actuator
+bodyShoulder.Joint = jnt2;
+addBody(robot, bodyShoulder, 'yaw');
+
+% Joint 3: Elbow pitch -- actuator 3. The 10" link1 rod is now the fixed
+% transform LEADING UP TO this joint, meaning it is swung BY the shoulder
+% (joint 2)'s rotation -- so it correctly leaves the XY plane as the
+% shoulder pitches, instead of being stuck flat.
+bodyElbow = rigidBody('elbow');
+jnt3 = rigidBodyJoint('joint3', 'revolute');
+jnt3.JointAxis = [0 1 0];
+jnt3.PositionLimits = [0, pi];
+setFixedTransform(jnt3, trvec2tform([link1 0 0])); % 10" rod, driven by the shoulder's rotation
+bodyElbow.Joint = jnt3;
+addBody(robot, bodyElbow, 'shoulder');
+
+% Joint 4: Wrist pitch -- actuator 4. The 6" link2 rod is swung by the
+% elbow (joint 3)'s rotation.
+bodyWrist = rigidBody('wrist');
+jnt4 = rigidBodyJoint('joint4', 'revolute');
+jnt4.JointAxis = [0 1 0];
+jnt4.PositionLimits = [0, pi];
+setFixedTransform(jnt4, trvec2tform([link2 0 0])); % 6" rod, driven by the elbow's rotation
+bodyWrist.Joint = jnt4;
+addBody(robot, bodyWrist, 'elbow');
+
+% End effector tip -- NOT an actuated joint. This is the fixed 3.5" rod
+% from the wrist actuator to the tip ("3 inches from center of actuation
+% to end effector tip"), swung by the wrist's rotation but not itself a DOF.
+bodyTip = rigidBody('endeffector');
+jntTip = rigidBodyJoint('jointTip', 'fixed');
+setFixedTransform(jntTip, trvec2tform([link3 0 0]));
+bodyTip.Joint = jntTip;
+addBody(robot, bodyTip, 'wrist');
+
+% Joint 5: Gripper (placeholder -- servo vs solenoid still TBD)
+% Not part of the reach chain; fill in once servo/solenoid is decided.
+% NOTE: a 'fixed' joint (jointTip above) contributes no DOF, so the
+% config vector passed to getTransform/checkCollision etc. is still 4x1
+% -- one entry per REVOLUTE joint (joint1-4), unaffected by this change.
+
+% Attach cylinder visuals so the linkages are actually observable (1" diameter).
+% Each rod is drawn on the DISTAL body, spanning from the parent's frame
+% (at -length along local x) to this body's own frame (at 0).
+linkDiameter = 1; % inches
+addLinkVisual(bodyElbow, link1, linkDiameter); % the 10" rod, drawn on bodyElbow
+addLinkVisual(bodyWrist, link2, linkDiameter); % the 6" rod, drawn on bodyWrist
+addLinkVisual(bodyTip, link3, linkDiameter);   % the 3.5" rod, drawn on bodyTip
+addVisual(bodyShoulder, 'cylinder', [platform_dia/2, 1], trvec2tform([0 0 0.5])); % actuator housing marker, spans yaw -> shoulder
+
+%% ---- 3. Environment: chessboard drawn on the XY plane, ChessBot frame ----
+% Board sits at z = 0 (flush with the robot base actuator), not raised by
+% boardHeight. BLS-frame square centers -> ChessBot frame using the SAME
+% base_center_BLS_frame offset already applied to the workspace corners.
+
+chessFig = figure('Name', 'Chess Robot Simulation');
+axMain = axes('Parent', chessFig);
+hold(axMain, 'on'); axis(axMain, 'equal'); grid(axMain, 'on');
+view(axMain, 45, 30);
+xlabel(axMain, 'X (in)'); ylabel(axMain, 'Y (in)'); zlabel(axMain, 'Z (in)');
+
+for file = 1:8       % file -> X direction (BLS square = file 1)
+    for rank = 1:8    % rank -> Y direction (BLS square = rank 1)
+        centerBLS = [(file-1)*squareSideLength, (rank-1)*squareSideLength, 0]; % z=0: on the XY plane
+        centerChessbot = centerBLS - base_center_BLS_frame;
+        isLight = mod(file + rank, 2) == 0;
+        faceColor = isLight * [0.9 0.9 0.8] + ~isLight * [0.3 0.2 0.1];
+        patch('Parent', axMain, ...
+              'XData', centerChessbot(1) + [-1 1 1 -1]*squareSideLength/2, ...
+              'YData', centerChessbot(2) + [-1 -1 1 1]*squareSideLength/2, ...
+              'ZData', centerChessbot(3)*[1 1 1 1], ...
+              'FaceColor', faceColor, 'FaceAlpha', 1);
+    end
+end
+
+% homeConfiguration() defaults every joint to 0, which may fall outside
+% the PositionLimits you've set (e.g. joint2 = [pi, 2*pi] doesn't include
+% 0) and can produce a strange pose. Use the midpoint of each joint's
+% actual limits instead, so the displayed pose is always valid.
+displayConfig = [mean(jnt1.PositionLimits); mean(jnt2.PositionLimits); ...
+                 mean(jnt3.PositionLimits); mean(jnt4.PositionLimits)];
+show(robot, displayConfig, 'Parent', axMain, 'PreservePlot', false);
+
+% show() can reset axes properties on a fresh axes -- reassert explicitly
+% so the Z axis and 3D box are guaranteed visible.
+view(axMain, 45, 30);
+box(axMain, 'on');
+grid(axMain, 'on');
+zlabel(axMain, 'Z (in)');
+
+% Guaranteed-visible arm rendering: a thick polyline through each joint's
+% frame, independent of whether the addVisual cylinder meshes render or
+% get visually lost under the transparent workspace volumes.
+drawArmLinks(robot, displayConfig, axMain, 6, [0.1 0.1 0.1]);
+
+% Mark the robot platform's origin (base of joint 1) with a green dot
+plot3(axMain, 0, 0, 0, 'o', 'MarkerSize', 10, 'MarkerFaceColor', [0 1 0], 'MarkerEdgeColor', 'k');
+
+% Overlay the required-workspace corner points for a quick sanity check
+plot3(axMain, X, Y, Z, 'r.', 'MarkerSize', 20);
+
+%% ---- 4. Reachable workspace: sample the end-effector's volume ----
+n = 8; % resolution per joint -- cost grows as n^4; raise once you confirm this runs end-to-end
+q1 = linspace(jnt1.PositionLimits(1), jnt1.PositionLimits(2), n);
+q2 = linspace(jnt2.PositionLimits(1), jnt2.PositionLimits(2), n);
+q3 = linspace(jnt3.PositionLimits(1), jnt3.PositionLimits(2), n);
+q4 = linspace(jnt4.PositionLimits(1), jnt4.PositionLimits(2), n);
+
+exclusionZones = struct('box', {}, 'pose', {}, 'restrictedLinks', {}); % empty until populated
+
+fprintf('Sampling reachable workspace (%d configurations)...\n', n^4);
+tic;
+maxPts = n^4;
+pts = zeros(maxPts, 3);
+idx = 0;
+for a = q1
+    for b = q2
+        for c = q3
+            for d = q4
+                config4 = [a; b; c; d]; % 4x1 -- matches the tree's actual joint count (gripper not yet added as a body)
+                if checkExclusion(robot, config4, exclusionZones)
+                    T = getTransform(robot, config4, 'endeffector');
+                    idx = idx + 1;
+                    pts(idx, :) = tform2trvec(T);
+                end
+            end
+        end
+    end
+end
+pts = pts(1:idx, :);
+fprintf('Done sampling workspace: %d points in %.1f seconds.\n', idx, toc);
+
+% Diagnostic: is the "dead zone" near the base bigger than the board's
+% near-edge offset? If so, that region will ALWAYS be excluded,
+% regardless of squareSideLength, since tol/platform_dia don't scale
+% with it.
+minReach = min(sqrt(sum(pts.^2, 2)));
+nearEdgeDist = sqrt((maxXmove/2)^2 + (tol + platform_dia/2)^2);
+fprintf('Minimum reachable radius from base: %.2f in\n', minReach);
+fprintf('Distance from base to nearest board-edge corner: %.2f in\n', nearEdgeDist);
+if minReach > nearEdgeDist
+    fprintf(['NOTE: minimum reach (%.2f in) exceeds the near-edge distance ' ...
+             '(%.2f in) -- this is why that region is always excluded. ' ...
+             'Increase tol/platform offset, or loosen joint limits so the ' ...
+             'arm can fold in closer to the base.\n'], minReach, nearEdgeDist);
+end
+
+shp = alphaShape(pts(:,1), pts(:,2), pts(:,3));
+
+%% ---- 5. Required workspace volume -- driven by your boundary points (inches) ----
+reqMin = [min(X), min(Y), min(Z)];
+reqMax = [max(X), max(Y), max(Z)];
+
+%% ---- 6. Containment test + color coding, overlaid on the main figure ----
+testPts = sampleBoxPoints(reqMin, reqMax, 10);
+inReach = inShape(shp, testPts(:,1), testPts(:,2), testPts(:,3));
+fullyContained = all(inReach);
+
+if fullyContained
+    workspaceColor = [0 1 0]; % green: reachable workspace covers the requirement
+else
+    workspaceColor = [1 0 0]; % red: does not fully cover the requirement
+end
+
+plot(shp, 'Parent', axMain, 'FaceColor', workspaceColor, 'FaceAlpha', 0.25, 'EdgeColor', 'none');
+drawBox(reqMin, reqMax, [0 0 1], 0.3, axMain); % required volume, forced blue, pinned to axMain
+
+if fullyContained
+    fprintf('Reachable workspace fully encompasses the required volume.\n');
+else
+    fprintf('Reachable workspace does NOT fully encompass the required volume.\n');
+end
+
+%% ---- 7. Exclusion zone framework (inactive until populated) ----
+% exclusionZones(end+1).box = collisionBox(L, W, H);   % inches
+% exclusionZones(end).pose  = trvec2tform([x y z]);    % inches, ChessBot frame
+% exclusionZones(end).restrictedLinks = {'elbow', 'wrist'}; % body names
+
+%% ---- Local functions ----
+
+function drawArmLinks(robot, config, ax, lineWidth, color)
+    % Draws a thick polyline through base -> yaw -> shoulder -> elbow ->
+    % wrist -> endeffector, guaranteed visible regardless of addVisual
+    % mesh rendering. Joints are marked with filled circles.
+    bodyNames = {'yaw', 'shoulder', 'elbow', 'wrist', 'endeffector'};
+    linePts = zeros(numel(bodyNames) + 1, 3);
+    linePts(1, :) = [0 0 0]; % base origin
+    for i = 1:numel(bodyNames)
+        T = getTransform(robot, config, bodyNames{i});
+        linePts(i + 1, :) = tform2trvec(T);
+    end
+    plot3(ax, linePts(:,1), linePts(:,2), linePts(:,3), '-o', ...
+          'Color', color, 'LineWidth', lineWidth, ...
+          'MarkerSize', 6, 'MarkerFaceColor', color, 'MarkerEdgeColor', color);
+end
+
+function addLinkVisual(body, linkLength, diameterIn)
+    % Draws a cylinder rod on `body`, spanning from the parent joint's
+    % frame (at -linkLength along local x) to this body's own frame (at
+    % 0), since that's the physical rod represented by this body's fixed
+    % transform. Default addVisual cylinders are centered on their own
+    % local z-axis, so we rotate z -> x, then shift the center back by
+    % half the length so the rod spans [-linkLength, 0] instead of being
+    % centered on the origin.
+    radius = diameterIn / 2;
+    rotateZtoX = axang2tform([0 1 0 pi/2]);
+    shiftBack = trvec2tform([-linkLength/2 0 0]);
+    tform = shiftBack * rotateZtoX;
+    addVisual(body, 'cylinder', [radius, linkLength], tform);
+end
+
+function pts = sampleBoxPoints(boxMin, boxMax, nPerSide)
+    [Xg, Yg, Zg] = ndgrid(linspace(boxMin(1), boxMax(1), nPerSide), ...
+                          linspace(boxMin(2), boxMax(2), nPerSide), ...
+                          linspace(boxMin(3), boxMax(3), nPerSide));
+    pts = [Xg(:) Yg(:) Zg(:)];
+end
+
+function drawBox(boxMin, boxMax, faceColor, faceAlpha, ax)
+    v = [boxMin(1) boxMin(2) boxMin(3);
+         boxMax(1) boxMin(2) boxMin(3);
+         boxMax(1) boxMax(2) boxMin(3);
+         boxMin(1) boxMax(2) boxMin(3);
+         boxMin(1) boxMin(2) boxMax(3);
+         boxMax(1) boxMin(2) boxMax(3);
+         boxMax(1) boxMax(2) boxMax(3);
+         boxMin(1) boxMax(2) boxMax(3)];
+    f = [1 2 3 4; 5 6 7 8; 1 2 6 5; 2 3 7 6; 3 4 8 7; 4 1 5 8];
+    patch('Parent', ax, 'Vertices', v, 'Faces', f, 'FaceColor', faceColor, ...
+          'FaceAlpha', faceAlpha, 'EdgeColor', 'k');
+end
+
+function valid = checkExclusion(robot, config, exclusionZones)
+    valid = true;
+    if isempty(exclusionZones)
+        return;
+    end
+    for z = 1:numel(exclusionZones)
+        zone = exclusionZones(z);
+        zone.box.Pose = zone.pose;
+        for linkName = zone.restrictedLinks
+            linkTform = getTransform(robot, config, linkName{1});
+            linkBox = collisionBox(0.4, 0.4, 0.4); % small proxy volume at link origin (inches)
+            linkBox.Pose = linkTform;
+            if checkCollision(zone.box, linkBox)
+                valid = false;
+                return;
+            end
+        end
+    end
+end
